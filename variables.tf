@@ -10,6 +10,10 @@ variable "ssh_key_name" {
     description = "Name of the SSH keypair to use in AWS."
 }
 
+variable "ssh_key_file" {
+    description = "Location of the SSH key to use in AWS."
+}
+
 variable "cluster_name" {
     default = "testing"
 }

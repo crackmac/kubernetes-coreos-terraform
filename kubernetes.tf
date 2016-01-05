@@ -59,7 +59,7 @@ resource "aws_security_group_rule" "allow_ssh" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ${var.aws_ssh_cidr_blocks}
     security_group_id = "${aws_security_group.kubernetes.id}"
 }
 
@@ -121,11 +121,12 @@ resource "aws_instance" "etcd" {
 
     connection {
         user = "core"
-        agent = true
+        key_file = "${var.ssh_key_file}"
+        #agent = true
     }
 
     tags {
-        Name = "kubernetes-${var.cluster_name}-etcd"
+        Name = "k8s-${var.cluster_name}-etcd"
         Cluster = "${var.cluster_name}"
         Role = "etcd"
     }
@@ -158,11 +159,12 @@ resource "aws_instance" "master" {
 
     connection {
         user = "core"
-        agent = true
+        key_file = "${var.ssh_key_file}"
+        #agent = true
     }
 
     tags {
-        Name = "kubernetes-${var.cluster_name}-master"
+        Name = "k8s-${var.cluster_name}-master"
         Cluster = "${var.cluster_name}"
         Role = "master"
     }
@@ -198,11 +200,12 @@ resource "aws_instance" "worker" {
 
     connection {
         user = "core"
-        agent = true
+        key_file = "${var.ssh_key_file}"
+        #agent = true
     }
 
     tags {
-        Name = "kubernetes-${var.cluster_name}-worker"
+        Name = "k8s-${var.cluster_name}-worker"
         Cluster = "${var.cluster_name}"
         Role = "worker"
     }

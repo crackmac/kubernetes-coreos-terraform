@@ -68,7 +68,7 @@ Requires=install-kubernetes.service
 
 [Service]
 EnvironmentFile=/etc/kubernetes.env
-ExecStartPre=/opt/bin/wupiao ${KUBERNETES_MASTER}/api/v1beta3/nodes
+ExecStartPre=/opt/bin/wupiao ${KUBERNETES_MASTER}/api/v1/nodes
 ExecStart=/opt/bin/kubelet \
   --api-servers=${KUBERNETES_MASTER}
   --allow-privileged==true \
@@ -90,7 +90,7 @@ Requires=install-kubernetes.service
 
 [Service]
 EnvironmentFile=/etc/kubernetes.env
-ExecStartPre=/opt/bin/wupiao ${KUBERNETES_MASTER}/api/v1beta3/nodes
+ExecStartPre=/opt/bin/wupiao ${KUBERNETES_MASTER}/api/v1/nodes
 ExecStart=/opt/bin/kubelet \
   --master==${KUBERNETES_MASTER}
   --logtostderr=true \
@@ -106,7 +106,7 @@ H=`hostname -f`
 cat <<EOF > /tmp/node.json
 {
   "kind": "Node",
-  "apiVersion": "v1beta3",
+  "apiVersion": "v1",
   "metadata": {
     "name": "${H}"
   }
@@ -118,7 +118,7 @@ for S in etcd flanneld docker kube-kubelet kube-proxy; do
   start $S
 done
 
-/opt/bin/wupiao ${KUBERNETES_MASTER}/api/v1beta3/nodes
+/opt/bin/wupiao ${KUBERNETES_MASTER}/api/v1/nodes
 kubectl --server=${KUBERNETES_MASTER} create -f /tmp/node.json
 
 

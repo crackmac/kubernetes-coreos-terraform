@@ -79,7 +79,7 @@ After=kube-apiserver.service
 
 [Service]
 EnvironmentFile=/etc/kubernetes.env
-ExecStartPre=/opt/bin/wupiao http://127.0.0.1:8080/api/v1beta3/nodes
+ExecStartPre=/opt/bin/wupiao http://127.0.0.1:8080/api/v1/nodes
 ExecStart=/opt/bin/kube-scheduler \
   --logtostderr=true \
   --master=http://127.0.0.1:8080 \
@@ -100,7 +100,7 @@ After=kube-apiserver.service
 
 [Service]
 EnvironmentFile=/etc/kubernetes.env
-ExecStartPre=/opt/bin/wupiao http://127.0.0.1:8080/api/v1beta3/nodes
+ExecStartPre=/opt/bin/wupiao http://127.0.0.1:8080/api/v1/nodes
 ExecStart=/opt/bin/kube-controller-manager \
   --logtostderr=true \
   --master=http://127.0.0.1:8080 \
