@@ -22,6 +22,10 @@ variable "containers_cidr" {
     default = "10.244.0.0/16"
 }
 
+variable "ssh_cidr" {
+    default = "0.0.0.0/0"
+}
+
 variable "portal_net" {
     default = "10.0.0.0/16"
 }

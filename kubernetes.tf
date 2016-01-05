@@ -59,7 +59,8 @@ resource "aws_security_group_rule" "allow_ssh" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_blocks = ${var.aws_ssh_cidr_blocks}
+    #cidr_blocks = ["204.128.192.32/32", "68.71.223.0/24"]
+    cidr_blocks = ["${split(",", var.ssh_cidr)}"]
     security_group_id = "${aws_security_group.kubernetes.id}"
 }
 
